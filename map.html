@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<title>Türkiye</title>
+<style type="text/css">
+      html { 
+	      height: 100%;
+	  }
+      
+	  body {
+		  height: 100%; 
+		  margin: 0; 
+		  padding: 0;
+		  background-color: gray;
+	  }
+      
+	  #harita{ 
+	  	  height: 100%;
+		  width: 65%; 
+		  margin-left: auto;
+          margin-right: auto;
+		  border-right-width: 2px;
+		  border-right-color: black;
+		  border-right-style: solid;
+		  border-left-width: 2px;
+		  border-left-color: black;
+		  border-left-style: solid;
+	  }
+	  
+	  .pop_up_box_text {
+	 	  font-family: Georgia, 'Times New Roman', Times, serif; 
+		  font-size: 16px; 
+		  line-height: 22px; 
+		  color: #ffffff; 
+		  display: inline; 
+	  }
+
+</style>
+<script type="text/javascript"
+ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtQKIOo-3KhvG5XnomQ1QKWpsEnXP4IT4&sensor=true">
+</script>
+<script type="text/javascript">
+var enlem=40.8758;//pendik enlem değeri
+var boylam=29.2308;//pendik boylam değeri
+var Harita;//içerisini dolduracağımız Map nesnesi
+var MerkezKoordinat=new google.maps.LatLng(enlem,boylam);//hedef koordinatı
+var HaritaZoomDerecesi = 6;//varsayılan zoom oranı
+google.maps.event.addDomListener(window, 'load', HaritaYükle);//sayfa yüklendiğinde tetiklenecek olay atandı.
+var HaritaMaksimumZoomDerecesi = 18;//maksimum zoom derecesi
+var HaritaMinimumZoomDerecesi = 6;//minimum zoom derecesi
+var HaritaAyarlari = { 
+		  center: MerkezKoordinat,
+                  zoom: HaritaZoomDerecesi ,		  
+                  mapTypeId: google.maps.MapTypeId.ROADMAP,
+		  maxZoom:HaritaMaksimumZoomDerecesi,
+		  minZoom:HaritaMinimumZoomDerecesi,		 
+		  panControl: false,
+		  mapTypeControl: false,
+};
+
+function HaritaYükle() { 
+      Harita= new google.maps.Map(document.getElementById("harita"), HaritaAyarlari);//harita div elementi ve ayarkadığımız harita seçenekleri api'ye gönderilir ve Harita nesnemiz yüklenir.	
+      IsaretciYukle();//Hedef konumu gösteren işaretçi ok yüklenir.
+}
+function IsaretciYukle(){      
+      Isaretleyici = new google.maps.Marker({
+                     position: MerkezKoordinat,	 
+                     map: Harita,
+                     title: 'İstanbul-Pendik'});                                      
+
+}
+</script>
+</head>
+<body>      
+    <div id="harita"></div>   
+</body>
+</html>
